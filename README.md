@@ -2,9 +2,12 @@
 
 Klassische **Event Study** in R zur Analyse der abnormalen Rendite der NVIDIA-Aktie rund um die Q4 FY2025-Quartalsergebnisse am **26. Februar 2026**.
 
-## Hintergrund
+## Hintergrund **TODO DATUM CHECK**
 
-NVIDIA veröffentlichte am 26. Februar 2026 Rekordergebnisse (Umsatz +100% YoY). Trotzdem reagierte die Börse mit Kursverlusten von ca. -5%. Dieses Projekt untersucht mithilfe des **CAPM-Modells**, wie stark diese Reaktion von der statistisch erwarteten Rendite abwich.
+NVIDIA veröffentlichte am 25. Februar 2026 (nach Börsenschluss) Rekordergebnisse (Umsatz +100% YoY). Trotzdem reagierte die Börse mit Kursverlusten von ca. -5%. Dieses Projekt untersucht mithilfe des **CAPM-Modells**, wie stark diese Reaktion von der statistisch erwarteten Rendite abwich.
+
+## **Wichtiger Hinweis zum Event-Tag:**
+Da die News erst *nach* Handelsende am 25.02. veröffentlicht wurden, ist das statistische Event-Datum ($t=0$) im Code auf den **26.02.2026** gesetzt. Das ist der erste Tag, an dem der Markt auf die Informationen reagieren konnte.
 
 ## Methodik (MacKinlay 1997)
 
@@ -56,6 +59,8 @@ ticker_market     <- "^GSPC"                 # Marktindex
 - Tabelle: AR und CAR pro Tag im Event Window
 - AR₀ und CAR in % als Kennzahlen
 - Zwei ggplot2-Grafiken (Balkendiagramm AR + Linienchart CAR)
+
+![Kumulierte Abnormale Rendite NVIDIA](plots/car_plot.png)
 
 ## Ergebnisinterpretation
 

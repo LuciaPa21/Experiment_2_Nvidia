@@ -50,6 +50,20 @@ p2 <- ggplot(event_data, aes(x = event_day, y = CAR * 100)) +
   theme_minimal(base_size = 13)
 print(p2)
 
+# --- Grafik für GitHub speichern ---
+
+# Ordner 'plots' erstellen, falls er noch nicht da ist
+if (!dir.exists("plots")) {
+  dir.create("plots")
+}
+
+# Speichert die CAR-Grafik (p2) als PNG-Datei
+ggsave(filename = "plots/car_plot.png", 
+       plot = p2, 
+       width = 8, 
+       height = 5, 
+       dpi = 300)
+
 # --- Plot 3: Sensitivitätsanalyse --------------------------------------------
 p3 <- ggplot(sens_results, aes(x = Event_Window, y = CAR_gesamt, fill = CAR_gesamt > 0)) +
   geom_col(width = 0.5, alpha = 0.85) +
