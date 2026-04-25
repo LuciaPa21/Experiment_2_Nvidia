@@ -64,6 +64,41 @@ ggsave(filename = "plots/car_plot.png",
        height = 5, 
        dpi = 300)
 
+# --- NEU: Plot 2b: Vergleich Erwartung vs. Realität (Das Paradoxon) -----------
+
+# Wir filtern die Daten für den Event-Tag (t=0)
+event_day_data <- subset(event_data, is_event)
+
+# Daten für den Vergleichsplot vorbereiten
+comp_data <- data.frame(
+  Typ = c("Realität (Tatsächlich)", "Modell (Erwartet)"),
+  Rendite = c(event_day_data$returns_stock * 100, event_day_data$expected_return * 100)
+)
+
+# --- DER ULTIMATIVE BRECHEISEN-FIX ---
+p2b <- ggplot(comp_data, aes(x = Typ, y = as.numeric(Rendite), fill = Typ)) +
+  geom_col(width = 0.5, alpha = 0.9) +
+  scale_fill_manual(values = c("Realität (Tatsächlich)" = "#e74c3c", 
+                               "Modell (Erwartet)" = "#3498db")) +
+  # Wir erzwingen hier die Skala von +0.5 bis -5.5
+  coord_cartesian(ylim = c(-5.5, 0.5)) +
+  scale_y_continuous(breaks = seq(-5, 0, by = 1)) +
+  labs(
+    title = "NVIDIA Paradoxon: Gute Zahlen, fallender Kurs",
+    subtitle = paste0("Abnormale Rendite: ", round(event_day_data$AR * 100, 2), "%"),
+    y = "Rendite (%)",
+    x = ""
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(legend.position = "none")
+
+print(p2b)
+
+# Speichern
+ggsave(filename = "plots/paradox_comparison.png", plot = p2b, width = 8, height = 5, dpi = 300)
+
+# -----------------------------------------------------------------------------
+
 # --- Plot 3: Sensitivitätsanalyse --------------------------------------------
 p3 <- ggplot(sens_results, aes(x = Event_Window, y = CAR_gesamt, fill = CAR_gesamt > 0)) +
   geom_col(width = 0.5, alpha = 0.85) +

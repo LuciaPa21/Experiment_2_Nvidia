@@ -26,6 +26,7 @@ source("04_capm.R")
 source("05_abnormal_returns.R")
 source("06_sensitivity.R")
 source("07_plots.R")
+source("08_diagnostics.R")
 
 cat("\n=====================================\n")
 cat("  Fertig! Alle Schritte abgeschlossen\n")

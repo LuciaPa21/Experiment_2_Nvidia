@@ -8,8 +8,7 @@
 # =============================================================================
 
 # --- Event -------------------------------------------------------------------
-event_date        <- as.Date("2026-02-26")  # Tag der Earnings-Veröffentlichung
-# Quelle: Aufgabenstellung, Thema 3 – CAPM und Event Study
+event_date        <- as.Date("2026-02-26")  #  statistische Event-Datum ($t=0$): 26.02.2026
 
 # --- Event Window ------------------------------------------------------------
 # Wie viele Handelstage VOR und NACH dem Event betrachten wir?
