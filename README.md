@@ -2,14 +2,14 @@
 
 Klassische **Event Study** in R zur Analyse der abnormalen Rendite der NVIDIA-Aktie rund um die Q4 FY2025-Quartalsergebnisse am **26. Februar 2026**.
 
-## Hintergrund **TODO DATUM CHECK**
+## Hintergrund
 
 NVIDIA veröffentlichte am 25. Februar 2026 (nach Börsenschluss) Rekordergebnisse (Umsatz +100% YoY). Trotzdem reagierte die Börse mit Kursverlusten von ca. -5%. Dieses Projekt untersucht mithilfe des **CAPM-Modells**, wie stark diese Reaktion von der statistisch erwarteten Rendite abwich.
 
 ## **Wichtiger Hinweis zum Event-Tag:**
 Da die News erst *nach* Handelsende am 25.02. veröffentlicht wurden, ist das statistische Event-Datum ($t=0$) im Code auf den **26.02.2026** gesetzt. Das ist der erste Tag, an dem der Markt auf die Informationen reagieren konnte.
 
-## Methodik (MacKinlay 1997)
+## Methodik 
 
 | Schritt | Beschreibung |
 |---|---|
@@ -30,25 +30,22 @@ CAR         = Σ AR_t
 ## Voraussetzungen
 
 - R (Version 4.0 oder höher)
-- Pakete einmalig installieren:
-
-```r
-install.packages(c("quantmod", "ggplot2", "dplyr", "lubridate"))
-```
+- Die benötigten Pakete werden beim ersten Start automatisch geprüft und installiert.
 
 ## Schnellstart
 
+Um die gesamte Analyse (Datenladen, Schätzung, Berechnung der AR/CAR und Plots) auszuführen, öffne das Projekt in RStudio und führe das Hauptskript aus:
+
 ```r
-source("event_study_nvidia.R")
-```
+source("main.R")
 
 ## Parameter anpassen
 
 ```r
 event_date        <- as.Date("2026-02-26")  # Datum des Events
-event_window_pre  <- 10                      # Tage VOR dem Event
-event_window_post <- 10                      # Tage NACH dem Event
-estimation_days   <- 120                     # Länge des Estimation Windows
+event_window_pre  <- 1                      # Tage VOR dem Event
+event_window_post <- 1                      # Tage NACH dem Event
+estimation_days   <- 252                    # Länge des Estimation Windows
 ticker_stock      <- "NVDA"                  # Aktie (z.B. "AAPL", "MSFT" ...)
 ticker_market     <- "^GSPC"                 # Marktindex
 ```
@@ -70,10 +67,5 @@ ticker_market     <- "^GSPC"                 # Marktindex
 | CAR < 0 | Negative Gesamtreaktion über das Event Window |
 | β > 1 | NVIDIA volatiler als der Gesamtmarkt |
 
-## Literatur
 
-MacKinlay, A. C. (1997). Event Studies in Economics and Finance. *Journal of Economic Literature*, 35(1), 13–39.
 
-## Lizenz
-
-MIT – frei verwendbar für Lehr- und Lernzwecke.

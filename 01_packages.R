@@ -5,12 +5,17 @@
 # Dieses Skript wird als erstes ausgeführt.
 # Es stellt sicher dass alle benötigten Pakete vorhanden sind.
 #
-# Beim allerersten Mal: Die install.packages()-Zeilen einkommentieren,
-# danach können sie wieder auskommentiert bleiben.
+# Fehlende Pakete werden automatisch installiert 
 # =============================================================================
 
-# --- Pakete installieren (nur einmalig nötig) --------------------------------
-# install.packages(c("quantmod", "ggplot2", "dplyr", "lubridate"))
+# --- Fehlende Pakete automatisch installieren --------------------------------
+packages <- c("quantmod", "ggplot2", "dplyr", "lubridate")
+
+new_packages <- packages[!(packages %in% installed.packages()[, "Package"])]
+if (length(new_packages) > 0) {
+  cat("Installiere fehlende Pakete:", paste(new_packages, collapse = ", "), "\n")
+  install.packages(new_packages)
+}
 
 # --- Pakete laden (bei jedem Start nötig) ------------------------------------
 library(quantmod)   # Finanzdaten von Yahoo Finance herunterladen

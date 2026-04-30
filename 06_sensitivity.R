@@ -9,15 +9,15 @@
 # Ändert sich das Ergebnis WENIG  -> Ergebnis ist glaubwürdig
 #
 # Wir testen 4 verschiedene Event Windows:
-# [0,0]     = Nur der exakte Event-Tag
-# [-1,+1]   = Minimaler Puffer
-# [-5,+5]   = Kurzes Window (wenig Vorabeffekte)
-# [-10,+10] = Unser Hauptmodell
+# [-1,+1]   = Unser Hauptmodell (minimales Window)
+# [-3,+3]   = Kurzes Window
+# [-5,+5]   = Mittleres Window
+# [-10,+10] = Breites Window (viele Vorabeffekte, mehr Rauschen)
 # =============================================================================
 
 cat("=== SENSITIVITÄTSANALYSE: Verschiedene Event Windows ===\n\n")
 
-event_windows <- list(c(0,0), c(1,1), c(5,5), c(10,10))
+event_windows <- list(c(1,1), c(3,3), c(5,5), c(10,10))
 sens_results  <- data.frame()
 
 for (ew in event_windows) {
@@ -40,7 +40,7 @@ for (ew in event_windows) {
   CAR_ev <- tail(ew_data$CAR, 1)
 
   sens_results <- rbind(sens_results, data.frame(
-    Event_Window = paste0("[", -pre, ", +", post, "]"),
+    Event_Window = paste0("[-", pre, ", +", post, "]"),
     AR_EventTag  = round(AR_ev * 100, 3),
     p_Wert       = round(p_ev, 4),
     Signifikant  = ifelse(p_ev < 0.05, "JA", "NEIN"),

@@ -72,7 +72,7 @@ event_day_data <- subset(event_data, is_event)
 # Daten für den Vergleichsplot vorbereiten
 comp_data <- data.frame(
   Typ = c("Realität (Tatsächlich)", "Modell (Erwartet)"),
-  Rendite = c(event_day_data$returns_stock * 100, event_day_data$expected_return * 100)
+  Rendite = c(event_day_data$r_stock * 100, event_day_data$expected_return * 100)
 )
 
 # --- DER ULTIMATIVE BRECHEISEN-FIX ---
